@@ -1,18 +1,17 @@
 {
-  "name": "typescript-template",
-  "private": true,
-  "version": "1.0.0",
+  "name": "rank",
+   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "typings": "dist/index.d.js",
   "scripts": {
-    "postinstall": "npx typesync || :",
-    "start": "npx ts-node ./src",
-    "start:dev": "npx ts-node-dev ./src",
-    "test": "npx jest",
+    "postinstall": "pnpx typesync || :",
+    "start": "pnpx ts-node ./src",
+    "start:dev": "pnpx ts-node-dev ./src",
+    "test": "pnpx jest",
     "prebuild": "rm -rf dist",
-    "build": "npx tsc",
-    "npm:publish": "npx np"
+    "build": "pnpx tsc",
+    "npm:publish": "pnpx np"
   },
   "repository": {
     "type": "git",
