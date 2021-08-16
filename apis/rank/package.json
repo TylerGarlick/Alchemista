@@ -1,5 +1,5 @@
 {
-  "name": "api-accounts",
+  "name": "typescript-template",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -33,6 +33,7 @@
   "homepage": "https://github.com/TylerGarlick/typescript-template#readme",
   "devDependencies": {
     "@tsconfig/node16": "^1.0.1",
+    "@types/graphql-iso-date": "^3.4.0",
     "@types/jest": "^26.0.23",
     "@types/node": "^15.12.5",
     "@types/prettier": "2.3.0",
@@ -47,8 +48,10 @@
     "typesync": "^0.8.0"
   },
   "dependencies": {
-    "accounts-persistence": "workspace:^1.0.0",
     "apollo-server": "^3.1.2",
-    "graphql": "^15.5.1"
+    "graphql": "^15.5.1",
+    "graphql-iso-date": "^3.6.1",
+    "graphql-type-json": "^0.3.2",
+    "nedb-promises": "^5.0.0"
   }
 }
