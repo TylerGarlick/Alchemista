@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum AccountStatus {
+  ACTIVE
+  IN_ACTIVE
+}
+
+enum ResourceVisibility {
+  PUBLIC
+  PROTECTED
+  PRIVATE
+}
+
+model Account {
+  id        Int           @id @default(autoincrement())
+  username  String        @db.VarChar(256)
+  name      String        @db.VarChar(512)
+  createdAt DateTime      @default(now())
+  key       String        @default(uuid()) @db.Uuid
+  status    AccountStatus
+
+  resources Resource[]
+  Feedback  Feedback[]
+}
+
+model Resource {
+  id          Int                @id @default(autoincrement())
+  title       String             @db.VarChar(512)
+  description String?
+  uri         String             @db.VarChar(2048)
+  labels      String[]
+  visibility  ResourceVisibility
+  account     Account            @relation(fields: [accountId], references: [id])
+  accountId   Int
+  objectives  Objective[]
+
+  createdAt DateTime @default(now())
+}
+
+model Objective {
+  id Int @id @default(autoincrement())
+
+  name        String
+  description String?
+  priority    Int     @default(1)
+  isRequired  Boolean @default(true)
+
+  resourceId Int
+  resource   Resource @relation(fields: [resourceId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  feedback Feedback[]
+}
+
+model Feedback {
+  id Int @id @default(autoincrement())
+
+  rating    Int      @default(0)
+  comment   String?
+  createdAt DateTime @default(now())
+
+  objectiveId Int
+  objective   Objective @relation(fields: [objectiveId], references: [id])
+
+  raterId Int
+  rater   Account @relation(fields: [raterId], references: [id])
+}
